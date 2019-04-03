@@ -18,6 +18,8 @@ namespace FinModel.Model
     }
     public class FDInterestRate
     {
+        private static readonly string strBank = "Bank";
+        private static readonly string strFC = "FC";
         [DisplayName("Year")]
         public string year
         {
@@ -75,28 +77,39 @@ namespace FinModel.Model
             }
         }
 
-        public bool fc_higher_fixed_deposits_3m {
+        public string fc_higher_fixed_deposits_3m {
             get
             {
-                return fc_fixed_deposits_3m > banks_fixed_deposits_3m;
+                if (fc_fixed_deposits_3m > banks_fixed_deposits_3m)
+                    return strFC;
+                else
+                    return strBank;
 
             }
         }
 
-        public bool fc_higher_fixed_deposits_6m
+        public string fc_higher_fixed_deposits_6m
         {
             get
             {
-                return fc_fixed_deposits_6m > banks_fixed_deposits_6m;
+                if (fc_fixed_deposits_6m > banks_fixed_deposits_6m)
+                    return strFC;
+                else
+                    return strBank;
+
 
             }
         }
 
-        public bool fc_higher_fixed_deposits_12m
+        public string fc_higher_fixed_deposits_12m
         {
             get
             {
-                return fc_fixed_deposits_12m > banks_fixed_deposits_12m;
+                if (fc_fixed_deposits_12m > banks_fixed_deposits_12m)
+                    return strFC;
+                else
+                    return strBank;
+
 
             }
         }
