@@ -8,7 +8,8 @@
         xmlns:local="clr-namespace:FinServiceApp"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="FD Interest Rates" Width="900" >
+        Width="1050"
+        Title="FD Interest Rates"  >
     <Window.Resources>
         <Style x:Key="HeaderStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Gray" />
@@ -111,21 +112,21 @@
 
         <Style x:Key="3mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_3m}" Value="True">
+                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_3m}" Value="FC">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="6mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_6m}" Value="True">
+                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_6m}" Value="FC">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="12mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_12m}" Value="True">
+                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_12m}" Value="FC">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
@@ -157,10 +158,11 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="Start Date"></TextBlock>
             <StackPanel Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
@@ -187,28 +189,75 @@
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               ItemsSource="{Binding YearList}"  SelectedValue="{Binding SelectedEndYear}"
              ></ComboBox>
+                
             </StackPanel>
             <Button HorizontalAlignment="Left" VerticalAlignment="Stretch"  Grid.Row="0" Grid.Column="4" Width="50" Style="{StaticResource InformButton}" Click="button_Click">Go</Button>
-
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                <TextBlock>High interest rate for finance companies</TextBlock>
+                <Rectangle Fill="#f7e011" HorizontalAlignment="right"
+                    Margin="0,0,0,0" Height="20"
+                   VerticalAlignment="Stretch" Width="150"
+                   />
+            </StackPanel>
 
         </Grid>
-        <DataGrid Grid.Row="2" ItemsSource="{Binding FDInterestRateList}" Width="800" Margin="5"
-                  
-                  AutoGeneratingColumn="DataGrid_AutoGeneratingColumn"
-                  CanUserAddRows="False">
-            <DataGrid.ColumnHeaderStyle>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <TextBlock FontWeight="Bold" FontSize="12" TextWrapping="Wrap" Text="{Binding}"></TextBlock>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </DataGrid.ColumnHeaderStyle>
-            
-        </DataGrid>
+        
+        <StackPanel Grid.Row="2" Margin="5">
+
+            <Grid >
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="400">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Width="{Binding Path=Width, ElementName=datagrid1}" HorizontalAlignment="Left" Margin="0 0 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding ElementName=Column1, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column2, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column3, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column4, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column5, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column6, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column7, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column8, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column9, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column10, Path=ActualWidth}"/>
+                                <ColumnDefinition Width="{Binding ElementName=Column11, Path=ActualWidth}"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Name='period' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Period</TextBlock>
+                            </Border>
+                            <Border Grid.Column="2" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Name='fixed_deposits_3m' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Fixed deposit interest for 3 months</TextBlock>
+                            </Border>
+                            <Border Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock  Name='fixed_deposits_6m' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Fixed deposit interest for 6 months</TextBlock>
+                            </Border>
+                            <Border Grid.Column="8" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Name='fixed_deposits_12m' Foreground="White" TextBlock.FontWeight='Bold' Background="Gray" TextWrapping="WrapWithOverflow"  Margin="1 0 0 0">Fixed deposit interest for 12 months</TextBlock>
+                            </Border>
+                        </Grid>
+                        <DataGrid IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0" HorizontalAlignment="Left"
+ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding FDInterestRateList}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Year" MinWidth="80" x:Name="Column1" Binding="{Binding year}" />
+                                <DataGridTextColumn Header="Month" MinWidth="100" x:Name="Column2" Binding="{Binding month}"/>
+                                <DataGridTextColumn Header="Bank" MinWidth="100" x:Name="Column3" Binding="{Binding banks_fixed_deposits_3m}"/>
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column4" Binding="{Binding fc_fixed_deposits_3m}"  CellStyle="{StaticResource 3mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column5" Binding="{Binding fc_higher_fixed_deposits_3m}" CellStyle="{StaticResource 3mGridCellStyle}" />
+                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column6" Binding="{Binding banks_fixed_deposits_6m}" />
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column7" Binding="{Binding fc_fixed_deposits_6m}"  CellStyle="{StaticResource 6mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column8" Binding="{Binding fc_higher_fixed_deposits_6m}"  CellStyle="{StaticResource 6mGridCellStyle}"/>
+                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column9" Binding="{Binding banks_fixed_deposits_12m}" />
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column10" Binding="{Binding fc_fixed_deposits_12m}"  CellStyle="{StaticResource 12mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column11" Binding="{Binding fc_higher_fixed_deposits_12m}"  CellStyle="{StaticResource 12mGridCellStyle}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </StackPanel>
     </Grid>
     
 </Window>
