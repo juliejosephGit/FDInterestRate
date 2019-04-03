@@ -45,38 +45,6 @@ namespace FinModel.Model
             }
         }
 
-        [DisplayName("Fixed deposit interest for 3 months (Banks/Finance Company)")]
-        public string fixed_deposits_3m {
-            get
-            {
-                
-
-                return banks_fixed_deposits_3m.ToString() + "/" + fc_fixed_deposits_3m.ToString();
-            }
-        }
-
-        [DisplayName("Fixed deposit interest for 6 months (Banks/Finance Company)")]
-        public string fixed_deposits_6m
-        {
-            get
-            {
-
-
-                return banks_fixed_deposits_6m.ToString() + "/" + fc_fixed_deposits_6m.ToString();
-            }
-        }
-
-        [DisplayName("Fixed deposit interest for 12 months (Banks/Finance Company)")]
-        public string fixed_deposits_12m
-        {
-            get
-            {
-
-
-                return banks_fixed_deposits_12m.ToString() + "/" + fc_fixed_deposits_12m.ToString();
-            }
-        }
-
         public string fc_higher_fixed_deposits_3m {
             get
             {

@@ -69,40 +69,29 @@ namespace FinModel
 
 
 
-        //public FDInterestRateResponse GetFDInterest()
-        //{
-        //    try
-        //    {
-        //        return  GetFDInterestFromAPI();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
+        public FDInterestRateResponse GetFDInterest(string startDate, string endDate)
+        {
+            try
+            {
+                var result = GetFDInterestFromAPI(startDate, endDate);
+                var settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                };
+                var FDInterestRateResponse = JsonConvert.DeserializeObject<FDInterestRateResponse>(result, settings);
+                return FDInterestRateResponse;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-        //}
+        }
 
-        //public async Task<FDInterestRateResponse> GetFDInterestFromAPI()
-        //{
-        //    try
-        //    {
-        //        ServicePointManager.Expect100Continue = true;
-        //        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-        //        var client = new HttpClient();
-        //        HttpResponseMessage response = await client.GetAsync(address);
-        //        response.EnsureSuccessStatusCode();
-        //        var result = await response.Content.ReadAsStringAsync();
-        //        var FDInterestRateResponse = JsonConvert.DeserializeObject<FDInterestRateResponse>(result);
-        //        return FDInterestRateResponse;
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        throw ex;
-        //    }
 
-        //}
 
-        public  FDInterestRateResponse GetFDInterestFromAPI(string startDate, string endDate)
+        public  string GetFDInterestFromAPI(string startDate, string endDate)
         {
             try
             {
@@ -113,13 +102,8 @@ namespace FinModel
                 HttpResponseMessage response = client.GetAsync(requestUri).Result;
                 response.EnsureSuccessStatusCode();
                 var result = response.Content.ReadAsStringAsync().Result;
-                var settings = new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore
-                };
-                var FDInterestRateResponse = JsonConvert.DeserializeObject<FDInterestRateResponse>(result, settings);
-                return FDInterestRateResponse;
+                
+                return result;
             }
             catch (Exception ex)
             {

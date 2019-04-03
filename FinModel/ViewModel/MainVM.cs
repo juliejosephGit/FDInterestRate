@@ -89,7 +89,7 @@ namespace FinModel.ViewModel
         {
             string startDate = SelectedStartYear + "-" + (SelectedStartMonth.monthNumber).ToString("D2"); 
             string endDate = SelectedEndYear + "-" + SelectedEndMonth.monthNumber.ToString("D2");
-            var FDInterest = Singleton.SingleInstance.GetFDInterestFromAPI(startDate, endDate);
+            var FDInterest = Singleton.SingleInstance.GetFDInterest(startDate, endDate);
             FDInterestRateList = FDInterest.result.records;
         }
     }
