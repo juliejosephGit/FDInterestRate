@@ -2,10 +2,10 @@
 
 ### Design patterns:Singleton 
 <br />Class Name:Singleton 
-<br />Reason:one object is needed to coordinate the actions, across the system (for getting Month and FD interest rate from API)
+<br />Reason: One object is needed to coordinate the actions, across the system (for getting Month and FD interest rate from API)
 
 ### Architectural pattern:MVVM
-<br />separation of development of GUI code from development of the business logic or back-end logic 
+<br />Separation of development of GUI code from development of the business logic or back-end logic 
 
 ### How to build?
 <br />1. Download the repository
