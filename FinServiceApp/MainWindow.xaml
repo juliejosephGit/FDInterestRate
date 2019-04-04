@@ -189,7 +189,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="Start Date"></TextBlock>
+            <TextBlock FontWeight="Medium" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="Start Date"></TextBlock>
             <StackPanel Margin="2 2 15 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               ItemsSource="{Binding MonthList}" DisplayMemberPath="monthName"  
@@ -203,7 +203,7 @@
 
 
 
-            <TextBlock Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Text="End Date"></TextBlock>
+            <TextBlock FontWeight="Medium" Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Text="End Date"></TextBlock>
 
             <StackPanel Margin="2 2 15 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="3"  Orientation="Horizontal">
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -219,7 +219,7 @@
 
 
             <StackPanel Margin="2 2 15 2" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3" Orientation="Horizontal">
-                <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Text="Highlight high Interest"></TextBlock>
+                <TextBlock FontWeight="Medium" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Text="Highlight high Interest"></TextBlock>
 
                 <RadioButton Margin="2 0 0 0" x:Name="optNone" GroupName="opthighlight" IsChecked="{Binding Highlight, Converter={StaticResource ResourceKey=highlightConverterKey}, ConverterParameter=0}">None</RadioButton>
                 <RadioButton Margin="2 0 0 0" x:Name="optFC" GroupName="opthighlight" IsChecked="{Binding Highlight, Converter={StaticResource ResourceKey=highlightConverterKey}, ConverterParameter=1}">FC</RadioButton>
@@ -233,7 +233,6 @@
         <StackPanel Grid.Row="2" Margin="5">
 
             <Grid >
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="400">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -266,7 +265,8 @@
                                 <TextBlock Name='fixed_deposits_12m' Foreground="White" TextBlock.FontWeight='Bold' Background="Gray" TextWrapping="WrapWithOverflow"  Margin="1 0 0 0">Fixed deposit interest for 12 months</TextBlock>
                             </Border>
                         </Grid>
-                        <DataGrid IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1" Grid.Row="1" RowHeaderWidth="0" HorizontalAlignment="Left"
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="400">
+                        <DataGrid IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1"  RowHeaderWidth="0" HorizontalAlignment="Left"
 ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding FDInterestRateList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Year" MinWidth="80" x:Name="Column1" Binding="{Binding year}" />
@@ -282,8 +282,9 @@ ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility
                                 <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column11" Binding="{Binding higher_fixed_deposits_12m}" />
                             </DataGrid.Columns>
                         </DataGrid>
+                    </ScrollViewer>
+                        
                     </Grid>
-                </ScrollViewer>
             </Grid>
         </StackPanel>
     </Grid>

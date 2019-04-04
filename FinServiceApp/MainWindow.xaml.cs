@@ -129,7 +129,12 @@ namespace FinServiceApp
         {
             try
             {
-                mainVM.GetFDInterestRateList();
+                var startDate = new DateTime(mainVM.SelectedStartYear, mainVM.SelectedStartMonth.monthNumber, 1);
+                var endDate = new DateTime(mainVM.SelectedEndYear, mainVM.SelectedEndMonth.monthNumber, 1);
+                if(startDate<=endDate)
+                    mainVM.GetFDInterestRateList();
+                else
+                    MessageBox.Show("Invalid date range!");
             }
             catch(Exception ex)
             {
