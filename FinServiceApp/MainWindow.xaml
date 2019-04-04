@@ -236,6 +236,7 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Width="{Binding Path=Width, ElementName=datagrid1}" HorizontalAlignment="Left" Margin="0 0 0 0">
@@ -252,21 +253,65 @@
                                 <ColumnDefinition Width="{Binding ElementName=Column10, Path=ActualWidth}"/>
                                 <ColumnDefinition Width="{Binding ElementName=Column11, Path=ActualWidth}"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
                                 <TextBlock Name='period' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Period</TextBlock>
                             </Border>
-                            <Border Grid.Column="2" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                            <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
                                 <TextBlock Name='fixed_deposits_3m' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Fixed deposit interest for 3 months</TextBlock>
                             </Border>
-                            <Border Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                            <Border Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
                                 <TextBlock  Name='fixed_deposits_6m' Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Fixed deposit interest for 6 months</TextBlock>
                             </Border>
-                            <Border Grid.Column="8" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                            <Border Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
                                 <TextBlock Name='fixed_deposits_12m' Foreground="White" TextBlock.FontWeight='Bold' Background="Gray" TextWrapping="WrapWithOverflow"  Margin="1 0 0 0">Fixed deposit interest for 12 months</TextBlock>
                             </Border>
-                        </Grid>
+                            <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Month</TextBlock>
+                            </Border>
+                            
+                            
+                            <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Year</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="1" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Month</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="2" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                            <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Bank</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="3" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">FC</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="4" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">High</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="5" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Bank</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="6" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">FC</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="7" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">High</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="8" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">Bank</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="9" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">FC</TextBlock>
+                            </Border>
+                            <Border Grid.Row="1" Grid.Column="10" BorderBrush="White" HorizontalAlignment="Stretch" BorderThickness=".5">
+                                <TextBlock Foreground="White" TextBlock.FontWeight='Bold'  Background="Gray" TextWrapping="WrapWithOverflow" Margin="1 0 0 0">High</TextBlock>
+                            </Border>
+
+
+                    </Grid>
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="400">
-                        <DataGrid IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1"  RowHeaderWidth="0" HorizontalAlignment="Left"
+                        <DataGrid HeadersVisibility="None" IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1"  RowHeaderWidth="0" HorizontalAlignment="Left"
 ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding FDInterestRateList}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Year" MinWidth="80" x:Name="Column1" Binding="{Binding year}" />
