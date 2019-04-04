@@ -14,5 +14,5 @@
 
 ### How to run?
 <br />1. Open command prompt
-<br />2. Go to folder where .exe resides (path-> FinService\FinServiceApp\FinServiceApp\bin\Release)
+<br />2. Go to folder where .exe resides (path-> FinService\FinServiceApp\FinServiceApp\bin\Release , FinService\FinServiceApp\FinServiceApp\bin\Debug)
 <br />3. Run exe in command line (coomand -> FinServiceApp  2018-04 2019-03)
