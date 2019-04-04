@@ -69,7 +69,7 @@ namespace FinModel
 
 
 
-        public FDInterestRateResponse GetFDInterest(string startDate, string endDate)
+        public FDInterestRateResponse GetFDInterest(string startDate, string endDate, int highlight=0)
         {
             try
             {
@@ -80,6 +80,10 @@ namespace FinModel
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
                 var FDInterestRateResponse = JsonConvert.DeserializeObject<FDInterestRateResponse>(result, settings);
+                foreach(var record in FDInterestRateResponse.result.records)
+                {
+                    record.highlight = highlight;
+                }
                 return FDInterestRateResponse;
             }
             catch (Exception ex)

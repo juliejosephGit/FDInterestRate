@@ -27,6 +27,7 @@ namespace FinModel.ViewModel
         private int selectedStartYear;
         private Month selectedEndMonth;
         private int selectedEndYear;
+        private int highlight;
 
         private List<FDInterestRate> _FDInterestRateList;
 
@@ -70,27 +71,52 @@ namespace FinModel.ViewModel
             }
         }
 
+        public int Highlight
+        {
+            get { return this.highlight; }
+            set
+            {
+                this.highlight = value;
+                this.NotifyPropertyChanged("Highlight");
+            }
+        }
         public MainVM()
         {
-            MonthList = Singleton.SingleInstance.Months;
-            YearList = Singleton.SingleInstance.Years;
+            try
+            {
+                highlight = 0;
+                MonthList = Singleton.SingleInstance.Months;
+                YearList = Singleton.SingleInstance.Years;
 
-            SelectedStartMonth = new Month(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month), DateTime.Now.Month);
-            SelectedStartYear = DateTime.Now.Year;
+                SelectedStartMonth = new Month(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month), DateTime.Now.Month);
+                SelectedStartYear = DateTime.Now.Year;
 
-            SelectedEndMonth = new Month(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month), DateTime.Now.Month);
-            SelectedEndYear = DateTime.Now.Year;
+                SelectedEndMonth = new Month(CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month), DateTime.Now.Month);
+                SelectedEndYear = DateTime.Now.Year;
 
-            GetFDInterestRateList();
+                GetFDInterestRateList();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public void GetFDInterestRateList()
         {
-            string startDate = SelectedStartYear + "-" + (SelectedStartMonth.monthNumber).ToString("D2"); 
-            string endDate = SelectedEndYear + "-" + SelectedEndMonth.monthNumber.ToString("D2");
-            var FDInterest = Singleton.SingleInstance.GetFDInterest(startDate, endDate);
-            FDInterestRateList = FDInterest.result.records;
+            try
+            {
+                string startDate = SelectedStartYear + "-" + (SelectedStartMonth.monthNumber).ToString("D2");
+                string endDate = SelectedEndYear + "-" + SelectedEndMonth.monthNumber.ToString("D2");
+                var FDInterest = Singleton.SingleInstance.GetFDInterest(startDate, endDate, highlight);
+
+                FDInterestRateList = FDInterest.result.records;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

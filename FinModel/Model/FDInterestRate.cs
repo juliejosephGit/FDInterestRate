@@ -18,6 +18,7 @@ namespace FinModel.Model
     }
     public class FDInterestRate
     {
+        
         private static readonly string strBank = "Bank";
         private static readonly string strFC = "FC";
         [DisplayName("Year")]
@@ -45,42 +46,92 @@ namespace FinModel.Model
             }
         }
 
-        public string fc_higher_fixed_deposits_3m {
+        public string higher_fixed_deposits_3m {
             get
             {
+                
+
                 if (fc_fixed_deposits_3m > banks_fixed_deposits_3m)
                     return strFC;
-                else
+                else if ( fc_fixed_deposits_3m < banks_fixed_deposits_3m)
                     return strBank;
-
+                else
+                    return "";
             }
         }
 
-        public string fc_higher_fixed_deposits_6m
+        public string higher_fixed_deposits_6m
         {
             get
             {
                 if (fc_fixed_deposits_6m > banks_fixed_deposits_6m)
                     return strFC;
-                else
+                else if (fc_fixed_deposits_6m < banks_fixed_deposits_6m)
                     return strBank;
-
+                else
+                    return "";
 
             }
         }
 
-        public string fc_higher_fixed_deposits_12m
+        public string higher_fixed_deposits_12m
         {
             get
             {
+                
                 if (fc_fixed_deposits_12m > banks_fixed_deposits_12m)
                     return strFC;
-                else
+                else if (fc_fixed_deposits_12m < banks_fixed_deposits_12m)
                     return strBank;
+                else
+                    return "";
+            }
+        }
 
+        public string highlight_higher_fixed_deposits_3m
+        {
+            get
+            {
+
+
+                if (highlight == 1 && fc_fixed_deposits_3m > banks_fixed_deposits_3m)
+                    return strFC;
+                else if (highlight == 2 && fc_fixed_deposits_3m < banks_fixed_deposits_3m)
+                    return strBank;
+                else
+                    return "";
+            }
+        }
+
+        public string highlight_higher_fixed_deposits_6m
+        {
+            get
+            {
+                if (highlight == 1 && fc_fixed_deposits_6m > banks_fixed_deposits_6m)
+                    return strFC;
+                else if (highlight == 2 && fc_fixed_deposits_6m < banks_fixed_deposits_6m)
+                    return strBank;
+                else
+                    return "";
 
             }
         }
+
+        public string highlight_higher_fixed_deposits_12m
+        {
+            get
+            {
+
+                if (highlight == 1 && fc_fixed_deposits_12m > banks_fixed_deposits_12m)
+                    return strFC;
+                else if (highlight == 2 && fc_fixed_deposits_12m < banks_fixed_deposits_12m)
+                    return strBank;
+                else
+                    return "";
+            }
+        }
+
+        public int highlight { get; set; }
 
         [JsonProperty("end_of_month")]
         [DisplayName("End Of Month")]
