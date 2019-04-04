@@ -310,7 +310,7 @@
 
 
                     </Grid>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="400">
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Height="350">
                         <DataGrid HeadersVisibility="None" IsHitTestVisible="False" AutoGenerateColumns="False" Name="datagrid1"  RowHeaderWidth="0" HorizontalAlignment="Left"
 ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"  ItemsSource="{Binding FDInterestRateList}">
                             <DataGrid.Columns>
