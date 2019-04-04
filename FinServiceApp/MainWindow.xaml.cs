@@ -81,74 +81,60 @@ namespace FinServiceApp
             {
                 Console.WriteLine("Error:" + e.Message);
             }
-
-
-            
-
-        }
-
-        private void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            e.Column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
-            string displayName = GetPropertyDisplayName(e.PropertyDescriptor);
-            if (!string.IsNullOrEmpty(displayName))
-            {
-                e.Column.Header = displayName;
-            }
-
-            if (e.PropertyName == "year" || e.PropertyName == "month" || e.PropertyName == "fixed_deposits_3m" || e.PropertyName == "fixed_deposits_6m" || e.PropertyName == "fixed_deposits_12m")
-                e.Cancel = false;
-            else
-                e.Cancel = true;
-            if(e.PropertyName== "fixed_deposits_3m")
-                e.Column.CellStyle = (Style)Resources["3mGridCellStyle"];
-            else if (e.PropertyName == "fixed_deposits_6m")
-                e.Column.CellStyle = (Style)Resources["6mGridCellStyle"];
-            else if (e.PropertyName == "fixed_deposits_12m")
-                e.Column.CellStyle = (Style)Resources["12mGridCellStyle"];
-            else 
-                e.Column.CellStyle = (Style)Resources["GridCellStyle"];
-
-
         }
 
         public static string GetPropertyDisplayName(object descriptor)
         {
 
-            PropertyDescriptor pd = descriptor as PropertyDescriptor;
-            if (pd != null)
+            try
             {
-                // Check for DisplayName attribute and set the column header accordingly
-                DisplayNameAttribute displayName = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
-                if (displayName != null && displayName != DisplayNameAttribute.Default)
-                {
-                    return displayName.DisplayName;
-                }
-
-            }
-            else
-            {
-                PropertyInfo pi = descriptor as PropertyInfo;
-                if (pi != null)
+                PropertyDescriptor pd = descriptor as PropertyDescriptor;
+                if (pd != null)
                 {
                     // Check for DisplayName attribute and set the column header accordingly
-                    Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                    for (int i = 0; i < attributes.Length; ++i)
+                    DisplayNameAttribute displayName = pd.Attributes[typeof(DisplayNameAttribute)] as DisplayNameAttribute;
+                    if (displayName != null && displayName != DisplayNameAttribute.Default)
                     {
-                        DisplayNameAttribute displayName = attributes[i] as DisplayNameAttribute;
-                        if (displayName != null && displayName != DisplayNameAttribute.Default)
+                        return displayName.DisplayName;
+                    }
+
+                }
+                else
+                {
+                    PropertyInfo pi = descriptor as PropertyInfo;
+                    if (pi != null)
+                    {
+                        // Check for DisplayName attribute and set the column header accordingly
+                        Object[] attributes = pi.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                        for (int i = 0; i < attributes.Length; ++i)
                         {
-                            return displayName.DisplayName;
+                            DisplayNameAttribute displayName = attributes[i] as DisplayNameAttribute;
+                            if (displayName != null && displayName != DisplayNameAttribute.Default)
+                            {
+                                return displayName.DisplayName;
+                            }
                         }
                     }
                 }
             }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
             return null;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            mainVM.GetFDInterestRateList();
+            try
+            {
+                mainVM.GetFDInterestRateList();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error:" + ex.Message);
+            }
         }
     }
 }

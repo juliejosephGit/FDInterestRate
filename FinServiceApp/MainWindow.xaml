@@ -110,35 +110,60 @@
         </Style>
         <local:MonthConverter x:Key="MonthConverter"/>
 
-        <Style x:Key="3mGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Style x:Key="bank3mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_3m}" Value="FC">
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_3m}" Value="Bank">
+                    <Setter Property="Background" Value="#f7e011"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="bank6mGridCellStyle" TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_6m}" Value="Bank">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="6mGridCellStyle" TargetType="{x:Type DataGridCell}">
+        <Style x:Key="bank12mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_6m}" Value="FC">
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_12m}" Value="Bank">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <Style x:Key="12mGridCellStyle" TargetType="{x:Type DataGridCell}">
+        
+        <Style x:Key="fc3mGridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_12m}" Value="FC">
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_3m}" Value="FC">
+                    <Setter Property="Background" Value="#f7e011"/>
+                </DataTrigger>
+                
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="fc6mGridCellStyle" TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_6m}" Value="FC">
+                    <Setter Property="Background" Value="#f7e011"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="fc12mGridCellStyle" TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_12m}" Value="FC">
                     <Setter Property="Background" Value="#f7e011"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="GridCellStyle" TargetType="{x:Type DataGridCell}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding fc_higher_fixed_deposits_12m}" Value="True">
+                <DataTrigger Binding="{Binding highlight_higher_fixed_deposits_12m}" Value="True">
                     <Setter Property="Background" Value="White"/>
                     <Setter Property="Foreground" Value="Black"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <local:HighlightConverter x:Key="highlightConverterKey" />
     </Window.Resources>
 
     <Grid>
@@ -165,7 +190,7 @@
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Text="Start Date"></TextBlock>
-            <StackPanel Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <StackPanel Margin="2 2 15 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               ItemsSource="{Binding MonthList}" DisplayMemberPath="monthName"  
                     SelectedItem="{Binding SelectedStartMonth}" SelectedValue="{Binding SelectedStartMonth.monthNumber, Mode=TwoWay}"
@@ -180,7 +205,7 @@
 
             <TextBlock Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="2" Text="End Date"></TextBlock>
 
-            <StackPanel Margin="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="3"  Orientation="Horizontal">
+            <StackPanel Margin="2 2 15 2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="3"  Orientation="Horizontal">
                 <ComboBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
               ItemsSource="{Binding MonthList}"   DisplayMemberPath="monthName" SelectedValue="{Binding SelectedEndMonth.monthNumber, Mode=TwoWay}"
                                  SelectedValuePath="monthNumber"
@@ -191,15 +216,18 @@
              ></ComboBox>
                 
             </StackPanel>
-            <Button HorizontalAlignment="Left" VerticalAlignment="Stretch"  Grid.Row="0" Grid.Column="4" Width="50" Style="{StaticResource InformButton}" Click="button_Click">Go</Button>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right" VerticalAlignment="Stretch">
-                <TextBlock>High interest rate for finance companies</TextBlock>
-                <Rectangle Fill="#f7e011" HorizontalAlignment="right"
-                    Margin="0,0,0,0" Height="20"
-                   VerticalAlignment="Stretch" Width="150"
-                   />
-            </StackPanel>
 
+
+            <StackPanel Margin="2 2 15 2" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <TextBlock  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Text="Highlight high Interest"></TextBlock>
+
+                <RadioButton Margin="2 0 0 0" x:Name="optNone" GroupName="opthighlight" IsChecked="{Binding Highlight, Converter={StaticResource ResourceKey=highlightConverterKey}, ConverterParameter=0}">None</RadioButton>
+                <RadioButton Margin="2 0 0 0" x:Name="optFC" GroupName="opthighlight" IsChecked="{Binding Highlight, Converter={StaticResource ResourceKey=highlightConverterKey}, ConverterParameter=1}">FC</RadioButton>
+                <RadioButton Margin="2 0 0 0" x:Name="optBank" GroupName="opthighlight" IsChecked="{Binding Highlight, Converter={StaticResource ResourceKey=highlightConverterKey}, ConverterParameter=2}">Bank</RadioButton>
+                <Button Margin="15 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Stretch"   Width="50" Style="{StaticResource InformButton}" Click="button_Click">Go</Button>
+
+            </StackPanel>
+            
         </Grid>
         
         <StackPanel Grid.Row="2" Margin="5">
@@ -243,15 +271,15 @@ ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Year" MinWidth="80" x:Name="Column1" Binding="{Binding year}" />
                                 <DataGridTextColumn Header="Month" MinWidth="100" x:Name="Column2" Binding="{Binding month}"/>
-                                <DataGridTextColumn Header="Bank" MinWidth="100" x:Name="Column3" Binding="{Binding banks_fixed_deposits_3m}"/>
-                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column4" Binding="{Binding fc_fixed_deposits_3m}"  CellStyle="{StaticResource 3mGridCellStyle}"/>
-                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column5" Binding="{Binding fc_higher_fixed_deposits_3m}" CellStyle="{StaticResource 3mGridCellStyle}" />
-                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column6" Binding="{Binding banks_fixed_deposits_6m}" />
-                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column7" Binding="{Binding fc_fixed_deposits_6m}"  CellStyle="{StaticResource 6mGridCellStyle}"/>
-                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column8" Binding="{Binding fc_higher_fixed_deposits_6m}"  CellStyle="{StaticResource 6mGridCellStyle}"/>
-                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column9" Binding="{Binding banks_fixed_deposits_12m}" />
-                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column10" Binding="{Binding fc_fixed_deposits_12m}"  CellStyle="{StaticResource 12mGridCellStyle}"/>
-                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column11" Binding="{Binding fc_higher_fixed_deposits_12m}"  CellStyle="{StaticResource 12mGridCellStyle}"/>
+                                <DataGridTextColumn Header="Bank" MinWidth="100" x:Name="Column3" Binding="{Binding banks_fixed_deposits_3m}" CellStyle="{StaticResource bank3mGridCellStyle}"/>
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column4" Binding="{Binding fc_fixed_deposits_3m}"  CellStyle="{StaticResource fc3mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column5" Binding="{Binding higher_fixed_deposits_3m}" />
+                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column6" Binding="{Binding banks_fixed_deposits_6m}" CellStyle="{StaticResource bank6mGridCellStyle}"/>
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column7" Binding="{Binding fc_fixed_deposits_6m}"  CellStyle="{StaticResource fc6mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column8" Binding="{Binding higher_fixed_deposits_6m}" />
+                                <DataGridTextColumn Header="Bank" MinWidth="90" x:Name="Column9" Binding="{Binding banks_fixed_deposits_12m}" CellStyle="{StaticResource bank12mGridCellStyle}"/>
+                                <DataGridTextColumn Header="FC" MinWidth="90" x:Name="Column10" Binding="{Binding fc_fixed_deposits_12m}"  CellStyle="{StaticResource fc12mGridCellStyle}"/>
+                                <DataGridTextColumn Header="High Interest" MinWidth="90" x:Name="Column11" Binding="{Binding higher_fixed_deposits_12m}" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
