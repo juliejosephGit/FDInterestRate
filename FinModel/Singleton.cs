@@ -18,7 +18,7 @@ namespace FinModel
         private static readonly object lockObject = new object();
         private static readonly int startYear = 1983;
         //        private static readonly string address = " https://eservices.mas.gov.sg/api/action/datastore/search.json?resource_id=5f2b18a8-0883-4769-a635-879c63d3caac&between[end_of_month]=2008-01,2010-12";
-        private static readonly string address = @"https://eservices.mas.gov.sg/api/action/datastore/search.json?resource_id=5f2b18a8-0883-4769-a635-879c63d3caac&between[end_of_month]={0},{1}";
+        private static readonly string address = @"https://eservices.mas.gov.sg/api/action/datastore/search.json?resource_id=5f2b18a8-0883-4769-a635-879c63d3caac&limit={0}&between[end_of_month]={1},{2}";
         private Singleton()
         {
             instanceCounter++;
@@ -68,7 +68,11 @@ namespace FinModel
         }
 
 
-
+        public int GetMonthDifference(DateTime startDate, DateTime endDate)
+        {
+            int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
+            return Math.Abs(monthsApart);
+        }
         public FDInterestRateResponse GetFDInterest(string startDate, string endDate, int highlight=0)
         {
             try
@@ -99,10 +103,13 @@ namespace FinModel
         {
             try
             {
+                DateTime stDate = DateTime.Parse(startDate+"-01");
+                DateTime enDate = DateTime.Parse(endDate + "-28");
+                int mns = GetMonthDifference(stDate, enDate);
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 var client = new HttpClient();
-                var requestUri = string.Format(address, startDate, endDate);
+                var requestUri = string.Format(address, mns+1,startDate, endDate);
                 HttpResponseMessage response = client.GetAsync(requestUri).Result;
                 response.EnsureSuccessStatusCode();
                 var result = response.Content.ReadAsStringAsync().Result;
